@@ -1,0 +1,51 @@
+{% load static %}
+<head>
+<link rel="stylesheet" href="{% get_static_prefix %}/styles.css" type="text/css" media="screen" />
+<title>CGS Call Detail Report</title>
+</head>
+{% if form %}
+<form action="" method="post">{% csrf_token %}
+  <table>
+  {{ form.as_table }}
+  </table>
+  <input type="submit" value="Submit">
+  <input type="submit" name="export" value="Export">
+</form>
+{% endif %}
+{% if report_link %}
+<p>Download this report at <a href="{{ report_link }}">this link</a>.</p>
+{% endif %}
+{% if phone_records %}
+	<h1>Phone {{ start_time }} to {{ end_time }}
+	</h1>
+	<table>
+  <tr>
+    <th>
+    {{ phone_records|length }}
+    </th>
+  </tr>
+  <tr>
+    <th>Type</th>
+    <th>Ext</th>
+    <th>Trunk</th>
+    <th>Number</th>
+    <th>Incoming ext</th>
+    <th>Start Time</th>
+    <th>Duration</th>
+  </tr>
+	{% for record in phone_records %}
+	<tr>
+		<td>{{record.type}}</td>
+		<td>{{record.ext}}</td>
+		<td>{{record.trunk}}</td>
+		<td>{{record.line_number}}</td>
+		<td>{{record.incoming_ext}}</td>
+		<td>{{record.start_time|date:'Y-m-d H:i'}}</td>
+		<td>{{record.duration|date:'H:i:s'}}</td>
+	</tr>
+	{% endfor %}
+	</table>
+{% else %}
+	<p>No logs are available.</p>
+{% endif %}
+
