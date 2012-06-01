@@ -4,3 +4,11 @@ Note that my need for this application was my reason to begin learning Django. T
 
 Any feedback on this is encouraged in the form of Issues on github.
 
+Instructions:
+
+Modify settings.py
+
+Create values for PROJECT_DIRECTORY and LOG_FILE_NAME
+Create a value for SECRET_KEY
+
+
