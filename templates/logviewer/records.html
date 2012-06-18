@@ -16,12 +16,11 @@
 <p>Download this report at <a href="{{ report_link }}">this link</a>.</p>
 {% endif %}
 {% if phone_records %}
-	<h1>Phone {{ start_time }} to {{ end_time }}
-	</h1>
+	<h1>Call Detail Record {{ start_date }} to {{ end_date }}</h1>
 	<table>
   <tr>
     <th>
-    {{ phone_records|length }}
+    Total records: {{ phone_records|length }} Total call time: {{ duration }}
     </th>
   </tr>
   <tr>
@@ -35,11 +34,12 @@
   </tr>
 	{% for record in phone_records %}
 	<tr>
-		<td>{{record.type}}</td>
+		<td>{% if record.type == "IN  " %}Incoming{% else %}Outgoing{% endif %}</td>
+        <!--<td>{{record.type}}</td>-->
 		<td>{{record.ext}}</td>
 		<td>{{record.trunk}}</td>
 		<td>{{record.line_number}}</td>
-		<td>{{record.incoming_ext}}</td>
+		<td>{{ record.incoming_ext|default:"" }}</td>
 		<td>{{record.start_time|date:'Y-m-d H:i'}}</td>
 		<td>{{record.duration|date:'H:i:s'}}</td>
 	</tr>
