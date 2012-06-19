@@ -44,11 +44,10 @@
                     Outgoing
                 {% endif %}
             {% endif %}</td>
-        <!--<td>{{record.type}}</td>-->
 		<td>{{record.ext}}</td>
 		<td>{{record.trunk}}</td>
 		<td>{{record.line_number}}</td>
-		<td>{{ record.incoming_ext|default:"" }}</td>
+		<td>{{ record.incoming_ext|default:""|stringformat:"04d" }}</td>
 		<td>{{record.start_time|date:'Y-m-d H:i'}}</td>
 		<td>{{record.duration|date:'H:i:s'}}</td>
 	</tr>
