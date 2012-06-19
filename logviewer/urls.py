@@ -9,6 +9,5 @@ urlpatterns = patterns('',
     # url(r'^$', 'phones.views.home', name='home'),
     # url(r'^phones/', include('phones.foo.urls')),
 
-	 url(r'^logviewer/report/', 'logviewer.views.download_report'),
-	 url(r'^logviewer/search/', 'logviewer.views.search'),
+    url(r'^', 'logviewer.views.search')
 )

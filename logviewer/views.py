@@ -12,24 +12,14 @@ from django.http import HttpResponse
 from logviewer.forms import RecordSearchForm
 from logviewer.models import PhoneRecord
 
-import logging
-
-DOWNLOADS_PATH  = "/home/fritz/django-pbx-smdr-accounting"
+FILES_PATH  = "/home/fritz/django-pbx-smdr-accounting/logviewer/static/files"
 REPORT_FILENAME = "report.txt"
+REPORT_PATH = FILES_PATH + "/" + REPORT_FILENAME
+DOWNLOAD_PATH = "/media"
 
-def download_report (request):
-    """Download existing .csv report to user's computer"""
-    filename = DOWNLOADS_PATH + "/" + REPORT_FILENAME
-    wrapper = FileWrapper (open (filename))
-    content_type = mimetypes.guess_type (filename)[0]
-    response = HttpResponse (wrapper, content_type = content_type)
-    response['Content-Length'] = os.path.getsize (filename)
-    response['Content-Disposition'] = "attachment; filename=%s" % REPORT_FILENAME
-    return response
-    
 def export (records):
     """Export all records to a tab-delimited .csv file"""
-    recordWriter = csv.writer (open (REPORT_FILENAME, 'wb'), delimiter = '\t')
+    recordWriter = csv.writer (open (REPORT_PATH, 'wb'), delimiter = '\t')
 
     for r in records:
         recordWriter.writerow (r.to_sequence ())
@@ -42,7 +32,6 @@ def search (request):
     start_date = None
     end_date = None
         
-    logging.warn (request.method)
     if request.method == 'POST':
         form = RecordSearchForm (request.POST)
         if form.is_valid ():
@@ -69,11 +58,9 @@ def search (request):
                 dur = rec['duration']
                 total_duration += datetime.timedelta(0, dur.second, 0, 0, dur.minute, dur.hour, 0)
             
-            logging.warn(total_duration)
-
             if 'export' in request.POST:
                 export (records)
-                report_link = "../report/"
+                report_link = DOWNLOAD_PATH + "/" + REPORT_FILENAME
     return render_to_response ('logviewer/records.html',
                                {'form': form, 'phone_records': records,
                                 'report_link': report_link,
