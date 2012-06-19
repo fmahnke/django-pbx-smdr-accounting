@@ -34,7 +34,16 @@
   </tr>
 	{% for record in phone_records %}
 	<tr>
-		<td>{% if record.type == "IN" %}Incoming{% else %}Outgoing{% endif %}</td>
+		<td>
+            {% if record.type == "IN" %}
+                Incoming
+            {% else %}
+                {% if record.type == "RG" %}
+                    Ring
+                {% else %}
+                    Outgoing
+                {% endif %}
+            {% endif %}</td>
         <!--<td>{{record.type}}</td>-->
 		<td>{{record.ext}}</td>
 		<td>{{record.trunk}}</td>

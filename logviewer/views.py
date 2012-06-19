@@ -15,7 +15,7 @@ from logviewer.models import PhoneRecord
 import logging
 
 DOWNLOADS_PATH  = "/home/fritz/django-pbx-smdr-accounting"
-REPORT_FILENAME = "report.csv"
+REPORT_FILENAME = "report.txt"
 
 def download_report (request):
     """Download existing .csv report to user's computer"""
@@ -52,11 +52,10 @@ def search (request):
             records = PhoneRecord.objects.filter (
                 start_time__gt=cd['start_date'],
                 start_time__lt=cd['end_date'])
-            records = records.filter (ext__in=[107, 108, 113, 119, 8900]);
+            records = records.filter (ext__in=[100, 107, 108, 113, 119, 8900]);
 
-            # Exclude ring notifications
-            records = records.exclude (type__contains='RG')
-
+            if cd['ring'] is False:
+                records = records.exclude (type__contains='RG')
             if cd['incoming'] is False:
                 records = records.exclude (type__contains='IN')
             if cd['outgoing'] is False:

@@ -5,3 +5,5 @@ class RecordSearchForm(forms.Form):
     end_date   = forms.DateField()
     incoming   = forms.BooleanField(required=False, initial=True)
     outgoing   = forms.BooleanField(required=False, initial=True)
+    ring       = forms.BooleanField(required=False, initial=False)
+
