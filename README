@@ -1,14 +1,15 @@
-This is a small Django application that stores Call Detail Record (CDR) logs from Private Branch Exchange (PBX) phone systems.
+This is a small Django application that stores Call Detail Record (CDR) logs from Private Branch Exchange (PBX) phone systems. The data may be retrieved and viewed by date range.
 
-Note that my need for this application was my reason to begin learning Django. This is early code for a first Django project, so it should not necessarily be taken as production quality code.
+It has been tested with the following PBX systems:
 
-Any feedback on this is encouraged in the form of Issues on github.
+Inter-Tel Axxess 8520
+
+Any feedback is appreciated! Please feel free to fork, report issues, and make pull requests on github.
 
 Instructions:
 
-Modify settings.py
+You must customize settings.py for your configuration. In particular, you must
 
-Create values for PROJECT_DIRECTORY and LOG_FILE_NAME
-Create a value for SECRET_KEY
-
+- Create values for PROJECT_DIRECTORY and LOG_FILE_NAME
+- Create a value for SECRET_KEY (and keep it secret)
 
