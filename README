@@ -8,8 +8,13 @@ Any feedback is appreciated! Please feel free to fork, report issues, and make p
 
 Instructions:
 
-You must customize settings.py for your configuration. In particular, you must
+You will need a means to retrieve SMDR data from your PBX. This is most commmonly done by a serial connection or TCP/IP.
+
+The utilities directory contains a simple client for gathering SMDR data from the Inter-Tel Axxess 8520 by TCP/IP and adding it to an sqlite database.
+
+Once you have SMDR flowing to your database, you must customize settings.py for your configuration. In particular, you must
 
 - Create values for PROJECT_DIRECTORY and LOG_FILE_NAME
 - Create a value for SECRET_KEY (and keep it secret)
 
+Then set it up and serve it like any other Django project
