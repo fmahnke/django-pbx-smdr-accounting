@@ -1,20 +1,25 @@
-This is a small Django application that stores Call Detail Record (CDR) logs from Private Branch Exchange (PBX) phone systems. The data may be retrieved and viewed by date range.
+A Django application for storing and reporting Call Detail Record (CDR) logs from Private Branch Exchange (PBX) phone systems. The data may be retrieved using an HTTP form and filtered by date range.
 
 It has been tested with the following PBX systems:
 
 Inter-Tel Axxess 8520
 
-Any feedback is appreciated! Please feel free to fork, report issues, and make pull requests on github.
-
 Instructions:
 
-You will need a means to retrieve SMDR data from your PBX. This is most commmonly done by a serial connection or TCP/IP.
+django-pbx-smdr-accounting does not retrieve CDR logs from your PBX. You will need a means to retrieve CDR from your PBX. The typical way of doing this is by retrieving the call accounting data as Station Message Detail Record (SMDR) from your PBX. This is commmonly done by a RS-232 serial connection or TCP/IP.
 
-The utilities directory contains a simple client for gathering SMDR data from the Inter-Tel Axxess 8520 by TCP/IP and adding it to an sqlite database.
+Once SMDR is flowing from your PBX, you'll need to parse it and store the records in the django-pbx-smdr-accounting database.
 
-Once you have SMDR flowing to your database, you must customize settings.py for your configuration. In particular, you must
+To accomplish the above items, see my axxess_8520_smdr_client (also on github). It contains a simple client for gathering SMDR data from the Inter-Tel Axxess 8520 and adding it to the sqlite database.
+
+Once the SMDR is in the database, you're ready to configure the Django application to view it.
+
+You must customize settings.py for your configuration. In particular, you must
 
 - Create values for PROJECT_DIRECTORY and LOG_FILE_NAME
 - Create a value for SECRET_KEY (and keep it secret)
 
-Then set it up and serve it like any other Django project
+Then set it up and serve it like any other Django application.
+
+Any feedback is appreciated! Please feel free to fork, report issues, and make pull requests on github.
+
